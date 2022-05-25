@@ -21,8 +21,10 @@ if (document.querySelector('.header-body__burger')) {
 	openBtn.addEventListener('click', toggleBurger)
 	menu.addEventListener('click', (e) => {
 		if (e.target.classList != "header-body__menu-content") {
-			console.log(e.target);
-			toggleBurger()
+			if (window.innerWidth <= 992) {
+				console.log(123);
+				toggleBurger()
+			}
 		}
 	})
 }
@@ -203,6 +205,33 @@ if (document.documentElement.clientWidth > 1000) { // disable script if resoluti
   }
 
 }
+const anchors = document.querySelectorAll('a[href*="#"]')
+
+for (let anchor of anchors) {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault()
+
+        const blockID = anchor.getAttribute('href').substr(1)
+
+        document.getElementById(blockID).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    })
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    let btn = document.querySelector('#toTop');
+
+    btn.onclick = function (click) {
+        click.preventDefault();
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+    }
+});
 
 
 function testWebP(callback) {
